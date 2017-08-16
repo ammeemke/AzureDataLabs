@@ -12,7 +12,7 @@ Our first step is to create somewhere to store the data….
 
 <img src="./media/image1.png" width="311" height="586" />
 
-Create a storage account
+STEP 1. Create a storage account
 ========================
 
 1.  In the Portal search for “storage accounts” (not “classic”)
@@ -33,7 +33,7 @@ Create a storage account
 
 8.  Click “Create”.
 
-Create the Logic App
+STEP 2. Create the Logic App
 ====================
 
 In the following section we will create a logic app with three sections.
@@ -61,8 +61,8 @@ Create the logic app
 6.  Click
     “Create”<img src="./media/image3.png" width="243" height="255" />
 
-    1.  Set the Recurrence
-        ------------------
+Set the Recurrence
+------------------
 
 <!-- -->
 
@@ -100,7 +100,7 @@ Add the Blob storage activity
 
 <img src="./media/image6.png" width="210" height="247" />
 
-1.  Fill in the Folder path, Blob name and Blob content with the
+4.  Fill in the Folder path, Blob name and Blob content with the
     following values:
 
 -   Folder path: @{concat('newsfeed/', formatDateTime(utcnow(),
@@ -112,13 +112,12 @@ Add the Blob storage activity
 
 <img src="./media/image7.png" width="358" height="177" />
 
-1.  <img src="./media/image8.png" width="192" height="459" />Process the files with a Stream Analytics job.
-    =======================================================================================================
+STEP 3. Process the files with a Stream Analytics job.
+======================================================
 
-    1.  Create a Stream Analytics Job
-        -----------------------------
+Create a Stream Analytics Job
+-----------------------------
 
-<!-- -->
 
 1.  From the Portal search for Stream Analytics and click “Add”
 
@@ -127,27 +126,31 @@ Add the Blob storage activity
 
 3.  Click “Create”
 
-    1.  Create an Input
-        ---------------
-
-<!-- -->
+Create an Input
+---------------
 
 1.  Click on “Inputs” and then “Add” in the top left of the blade.
 
 2.  Fill in all required fields as per the image on this page.
 
-3.  Event Serialization format should be “JSON”.
-
-    1.  Add an Output
-        -------------
+<img src="./media/image8.png" width="192" height="459" />
 
 <!-- -->
 
-1.  <img src="./media/image9.png" width="165" height="328" />Click on
-    “Outputs” and then “Add” in the top left of the blade.
+3.  Event Serialization format should be “JSON”.
 
-2.  1.  Add the Query.
-        --------------
+Add an Output
+-------------
+
+
+1.  Click on “Outputs” and then “Add” in the top left of the blade.
+
+<img src="./media/image9.png" width="165" height="328" />
+
+<!-- -->
+
+Add the Query.
+--------------
 
         The text of the query should be:
 
@@ -167,11 +170,11 @@ Add the Blob storage activity
 
 <!-- -->
 
-1.  Generating Key Phrases with Data Lake Analytics 
-    ================================================
+STEP 4. Generating Key Phrases with Data Lake Analytics 
+================================================
 
-    1.  Create a Data Lake Analytics Account
-        ------------------------------------
+Create a Data Lake Analytics Account
+------------------------------------
 
 <!-- -->
 
@@ -187,8 +190,8 @@ Add the Blob storage activity
 
 3.  Click “Create” to create the data lake analytics account
 
-    1.  Link to the blob storage account we are using
-        ---------------------------------------------
+Link to the blob storage account we are using
+---------------------------------------------
 
 <!-- -->
 
@@ -201,10 +204,10 @@ Add the Blob storage activity
 
 <img src="./media/image11.png" width="207" height="146" />
 
-1.  Click “Add”
+4.  Click “Add”
 
-    1.  Load the Cognitive Service References
-        -------------------------------------
+Load the Cognitive Service References
+-------------------------------------
 
 The data lake does not automatically load the cognitive service
 libraries that we are going to use to do text analytics, so we must load
@@ -218,13 +221,13 @@ them “manually”.
 
 <img src="./media/image12.png" width="186" height="247" />
 
-1.  You can also copy the sample data, if you want to play with it, but
+3.  You can also copy the sample data, if you want to play with it, but
     it will not be used in this workshop.
 
-    1.  Extract Key Phrases from the news feed files with a U-SQL query
-        ---------------------------------------------------------------
+Extract Key Phrases from the news feed files with a U-SQL query
+---------------------------------------------------------------
 
-        1.  ### Using the Azure Portal
+### Using the Azure Portal
 
 <!-- -->
 
@@ -237,9 +240,7 @@ them “manually”.
 4.  Select between 5 and 30 AUs (degrees of parallelism). The more, the
     faster the job will run.
 
-5.  <span id="_Ref478653386" class="anchor"></span>Then paste or type
-    the following code into the code window. (Note: it’s case
-    sensitive!):
+5.  Then paste or type the following code into the code window. (Note: it’s case sensitive!):
 
 > REFERENCE ASSEMBLY \[TextCommon\];
 >
@@ -303,17 +304,16 @@ them “manually”.
 > HERE&gt;.blob.core.windows.net/KeyPhraseCounts.csv"
 >
 > ORDER BY KeyPhraseCount DESC
+>
+> USING Outputters.Tsv();
 
-USING Outputters.Tsv();
+6.  Click “Submit Job”, sit back, and relax.
 
-1.  Click “Submit Job”, sit back, and relax.
+7.  When the job is done, the output file will appear in your blob storage at the root of the “processednewsfeed” container.
 
-2.  When the job is done, the output file will appear in your blob
-    storage at the root of the “processednewsfeed” container.
+### Using Visual Studio
 
-    1.  ### Using Visual Studio
-
-        1.  #### Install the data lake tools for visual studio
+#### Install the data lake tools for visual studio
 
 <!-- -->
 
@@ -325,7 +325,7 @@ USING Outputters.Tsv();
 
 4.  Install the Data Lake tools.
 
-    1.  #### Create a Usql project and submit the job
+#### Create a Usql project and submit the job
 
 <!-- -->
 
@@ -353,8 +353,8 @@ USING Outputters.Tsv();
     Key Phrases from the news stories will appear in the storage account
     we created at the root of the “processednewsfeed” container.
 
-View Results in PowerBI
-=======================
+STEP 5. View Results in PowerBI
+===============================
 
 1.  If you do not already have a copy of PowerBI, download it here.
 
@@ -393,7 +393,7 @@ Something like this table should appear on the canvas to the left:
 
 <img src="./media/image21.png" width="194" height="199" />
 
-1.  Then in the “Visualizations” blade click the “Tree Map”
+10.  Then in the “Visualizations” blade click the “Tree Map”
     (<img src="./media/image22.png" width="18" height="17" />) and you
     will see a nice graphic of the top key phrases that appeared in
     Google News today about Microsoft:

@@ -10,7 +10,6 @@ can be deleted.
 
 Our first step is to create somewhere to store the data….
 
-<img src="./media/image1.png" width="311" height="586" />
 
 STEP 1. Create a storage account
 ========================
@@ -20,6 +19,8 @@ STEP 1. Create a storage account
 2.  Click “add” to create a new storage account
 
 3.  Give it a globally unique name
+
+<img src="./media/image1.png" width="311" height="586" />
 
 4.  Leave the Deployment model as “Resource manager”, the Account kind
     as “General purpose” and the Performance as “Standard”.
@@ -59,7 +60,9 @@ Create the logic app
 5.  Pick a location near you
 
 6.  Click
-    “Create”<img src="./media/image3.png" width="243" height="255" />
+    “Create”
+    
+<img src="./media/image3.png" width="243" height="255" />
 
 Set the Recurrence
 ------------------
